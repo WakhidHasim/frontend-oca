@@ -10,19 +10,20 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@types/node": "^20.10.5",
-    "@types/react-datepicker": "^4.19.4",
     "jwt-decode": "^4.0.0",
     "moment": "^2.29.4",
     "react": "^18.2.0",
     "react-date-range-picker": "^0.5.2",
     "react-datepicker": "^4.24.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.49.2",
     "react-icons": "^4.12.0",
     "react-router-dom": "^6.20.0",
     "react-table-filter": "^2.0.2"
   },
   "devDependencies": {
+    "@types/node": "^20.10.5",
+    "@types/react-datepicker": "^4.19.4",
     "@types/react": "^18.2.45",
     "@types/react-dom": "^18.2.17",
     "@types/react-table-filter": "^1.0.6",
