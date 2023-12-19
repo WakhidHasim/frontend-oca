@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Select from 'react-select';
+// import Select from 'react-select';
 
 interface OptionType {
   value: string;
@@ -10,7 +10,7 @@ const Status: React.FC = () => {
   const [selectedOption, setSelectedOption] = useState<OptionType | null>(null);
 
   const statusOptions: OptionType[] = [
-    {value: 'status', label: 'status'},
+    { value: 'status', label: 'status' },
     { value: 'pending', label: 'Pending' },
     { value: 'approved', label: 'Approved' },
     { value: 'rejected', label: 'Rejected' },
@@ -20,18 +20,17 @@ const Status: React.FC = () => {
     setSelectedOption(selectedOption);
   };
 
-  return (
-    <div className='items-center sm:mb-0 mr-2 text-xs'>
-      <Select
-        value={selectedOption}
-        onChange={handleChange}
-        options={statusOptions}
-        placeholder="Select Status"
-        className='rounded'
-        
-      />
-    </div>
-  );
+  // return (
+  //   <div className='items-center sm:mb-0 mr-2 text-xs'>
+  //     <Select
+  //       value={selectedOption}
+  //       onChange={handleChange}
+  //       options={statusOptions}
+  //       placeholder='Select Status'
+  //       className='rounded'
+  //     />
+  //   </div>
+  // );
 };
 
 export default Status;

@@ -1,13 +1,33 @@
-import React from 'react';
-import logo from "../../assets/logo.svg"
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import logo from '../../assets/logo.svg';
 import SatuanSatkerButton from '../../components/Button/SatuanSatkerButton';
 
 const Verifikasi: React.FC = () => {
-  const buttonData = [
-    'PRODI S1-SISTEM INFORMASI',
-    'DIREKTORAT PERENCANAAN DAN KEUANGAN',
-    'DIREKTORAT SARANA DAN PRASARANA',
-  ];
+  const navigate = useNavigate();
+
+  const [agentName, setAgentName] = useState<string | null>(null);
+  const [namaSatker, setNamaSatker] = useState<string[] | null>(null);
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      const { nama_pegawai, nama_satker } = JSON.parse(
+        atob(token.split('.')[1])
+      );
+
+      setAgentName(nama_pegawai || null);
+      setNamaSatker(Array.isArray(nama_satker) ? nama_satker : [nama_satker]);
+    }
+  }, []);
+
+  const handleSatkerSelection = () => {
+    if (namaSatker && namaSatker.length > 0) {
+      navigate('/dashboard', { state: { selectedSatker: namaSatker[0] } });
+    }
+  };
+
+  const buttonData = namaSatker || [];
 
   return (
     <div className='min-h-screen flex items-center justify-center bg-gray-100 '>
@@ -19,13 +39,23 @@ const Verifikasi: React.FC = () => {
                 <div className='w-12 lg:w-26 drop-shadow-md'>
                   <img src={logo} className='w-full' alt='Login' />
                 </div>
-                <h1 className='font-bold text-lg md:text-2xl py-2 pb-3 uppercase drop-shadow-md'>One Collecting Agent (OCA)</h1>
+                <h1 className='font-bold text-lg md:text-2xl py-2 pb-3 uppercase drop-shadow-md'>
+                  One Collecting Agent (OCA)
+                </h1>
               </div>
-              <h2 className='font-medium text-base lg:text-lg pb-6'>Wiwi Widayani, S.Kom M.Kom</h2>
-              <p className='text-sm text-slate-500 uppercase'>Pilih Satuan Kerja </p>
+              <h2 className='font-medium text-base lg:text-lg pb-6'>
+                {agentName}
+              </h2>
+              <p className='text-sm text-slate-500 uppercase'>
+                Pilih Satuan Kerja{' '}
+              </p>
               <div className='pt-3 space-y-4 justify-start flex items-center flex-col'>
                 {buttonData.map((text, index) => (
-                  <SatuanSatkerButton key={index} text={text}  />
+                  <SatuanSatkerButton
+                    key={index}
+                    text={text}
+                    onClick={() => handleSatkerSelection()}
+                  />
                 ))}
               </div>
             </div>
